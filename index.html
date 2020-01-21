@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta charset="utf-8">
+	    <title>Neighborhood map</title>
+	    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	    <link href="css/styles.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+	</head>
+
+	<body>
+		<div id="container">
+			<div id="sidebar">
+        <input id="search" placeholder="Search..." type="search" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off">
+        <ul id="location-list" data-bind="template: { name: 'sidebar-places-template', foreach: optionBarList}"></ul>
+			</div>
+    		<div id="map"></div>
+    	</div>
+
+  <script type="text/html" id="sidebar-places-template">
+    <li id="location" data-bind="click: $parent.bounceMarker">
+      <h1 data-bind="text: name"></h1>
+      <div id="wiki-container">
+        <div class="wikipedia" data-bind="visible: showWikipedia">
+          <span class="wikipedia-logo-container">
+            <img id="wikipedia-logo" src="images/WIkipedia_wordmark.svg" alt="Wikipedia">
+          </span>
+          <img class="place-picture" data-bind="attr: { src: photos }" />
+          <div id="wikipedia" data-bind="text: wikipediaSnippet"></div>
+        </div>
+      </div>
+      <div> 
+        <b>Address:</b> <span data-bind="text: address"></span>
+      </div>
+      <div class="ratings">
+        <div class="foursquare-logo"></div>
+        <div data-bind="text: foursquareRating"></div><i class="fas fa-star star"></i>
+      </div>
+      <div class="ratings">
+        <div class="yelp-logo"></div>
+        <div data-bind="text: yelpRating"></div><i class="fas fa-star star"></i>
+      </div>
+      <div><b>Status:</b> <span data-bind="text: yelpStatus"></span></div>
+      <div>
+        lat: <span data-bind="text: lat"></span>, 
+        lng: <span data-bind="text: lng"></span>
+      </div>
+    </li>
+  </script>  
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="js/knockout-3.4.2.js"></script>
+  <script src="js/app.js"></script>
+  <script async defer onerror="( function() { alert('Google Maps API failed to load...')})()" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2AGgVFOCoFukvXkwOHs6LKtaaHbUc_v8&v=3&callback=initMap&libraries=places"></script>  
+	</body>
+</html>
